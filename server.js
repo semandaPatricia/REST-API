@@ -3,6 +3,7 @@ const app = express()
 const cors =require('cors')
 const mongoose = require ('mongoose')
 const connectDB = require('./config/database')
+const shoeRoute = require ('./routes/shoeRoute')
 
 require('dotenv').config({path: './config/.env'})
 app.use(cors())
