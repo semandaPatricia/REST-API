@@ -1,71 +1,29 @@
 
 const express = require ('express')
-const shoe =require ('./models/shoeModel')
-const {getShoes, getShoe} = require('../controllers/shoeController')
+const Shoe =require ('../model/shoesModel.js')
+const {
+  getShoes,
+  getShoe,
+  createShoe,
+  updateShoe,
+  deleteShoe,
+} = require("../controllers/shoeController");
 
 const router =express .Router();
 
-router.get('/:id',async(req,res) =>{
-    try {
-        const { id } = req.params ;
-      const shoes = await shoes.find({})
-      res.status (200).json(shoes)
-      
-    } catch (error) {
-      console.log(error.message);
-      res.status (500).json ({message:error.message})
-      
-    }
-   })
+router.get('/', getShoes);
+
+router.get('/:id', getShoe);
 
 
-   router.get('/shoes/:id',async(req,res) =>{
-    try {
-        const { id } = req.params ;
-      const shoes = await shoes. findbyId(id)
-      res.status (200).json(shoes)
-      
-    } catch (error) {
-      console.log(error.message);
-      res.status (500).json ({message:error.message})
-      
-    }
-   })
+router.post('/', createShoe);
 
+// update a product
+router.put('/:id', updateShoe);
 
-   router.post('/:id',async(req,res) =>{
-    try {
-        const { id } = req.params ;
-      const shoes = await shoes.create(req.body)
-      res.status (200).json(shoes)
-      
-    } catch (error) {
-      console.log(error.message);
-      res.status (500).json ({message:error.message})
-      
-    }
-   })
+// delete a product
 
-
-   //DELETE A PRODUCT
-
-   router.get('/shoes/:id',async(req,res) =>{
-    try {
-        const { id } = req.params ;
-      const shoe = await shoe.findByIdAndDelete(id)
-      if (!shoe){
-        return res.status (404).json({message:`cant find any product with with ID ${id}` })
-      }
-      res.status (200).json(shoe)
-      
-    } catch (error) {
-      console.log(error.message);
-      res.status (500).json ({message:error.message})
-      
-    }
-   })
-
-//UPDATING THE PRODUCTS
+router.delete('/:id', deleteShoe);
     
  
 

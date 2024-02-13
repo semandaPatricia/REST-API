@@ -21,18 +21,10 @@ const shoeSchema = mongoose.Schema({
     occasion:{
         type:String,
         required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
     }
 
-})
+}, { timestamps: true })
 
-const shoeModel = mongoose.model( 'shoes' ,shoeSchema)
+const Shoe = mongoose.model('Shoe' ,shoeSchema);
 
-module.exports = shoeModel
+module.exports = Shoe;

@@ -1,15 +1,17 @@
 const express = require ('express')
-const app = express()
 const cors =require('cors')
 const mongoose = require ('mongoose')
 const connectDB = require('./config/database')
 const shoeRoute = require ('./routes/shoeRoute')
-
+const errorMiddleware = require('./middleware/errorMiddleware')
 require('dotenv').config({path: './config/.env'})
+
+const app = express()
+
+
 app.use(cors())
 
 const PORT =  process.env.PORT || 8000;
-
 connectDB()
 
 /*middleware*/
@@ -18,23 +20,22 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json()) 
 
 
+/*routes needed*/
+app.use('/api/shoes', shoeRoute);
+
 /*routes basic*/
 app.get('/', (req, res) => {
-    res.send('hello world ')
+    res.send('hello world,Hola ')
 
  })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
  
- app.get('/shoes',async(req,res) =>{
-  try {
-    const shoes = await shoes.find({})
-    res.status (200).json(shoes)
-    
-  } catch (error) {
-    console.log(error.message);
-    res.status (500).json ({message:error.message})
-    
-  }
- })
+ app.get('/blog', (req, res) => {
+  res.send('Hello Blog, My name is pat')
+})
+
+
+app.use(errorMiddleware);
+
 
  /*port*/
 app.listen(PORT, function () {
